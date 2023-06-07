@@ -1,6 +1,3 @@
-import math
-
-
 class RightTriangle:
     def __init__(self, first_cathetus, second_cathetus):
         self.first_cathetus = first_cathetus

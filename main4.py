@@ -1,27 +1,26 @@
 import math
-
 from main2 import ComplexNumber
 
 
 class ComplexResistance(ComplexNumber):
-    def __init__(self, real, imaginary, angular_frequency):
+    def __init__(self, real, imaginary):
         super().__init__(real, imaginary)
-        self.resistor_resistance = self.x.imag
-        self.inductance = self.x.real
-        self.angular_frequency = angular_frequency
+        self.angular_frequency = math.sqrt(self.x.real / self.x.imag)
 
-    def arg(self):
-        s = math.atan(self.resistor_resistance * self.inductance / self.angular_frequency)
+    def value(self):
+        s = abs(math.sqrt(self.x.real**2 + self.x.imag**2))
         return s
+
+    def info(self):
+        return f'Действительная часть = {self.x.real}\n' \
+               f'Мнимая часть = {self.x.imag}\n' \
+               f'Угловая частота = {self.angular_frequency}'
 
 
 if __name__ == '__main__':
     print('Введите комплексное число')
     a, b = int(input()), int(input())
-    print('Введите значение угловой частоты')
-    c = int(input())
-    result = ComplexResistance(a, b, c)
+    result = ComplexResistance(a, b)
     print(result.info())
-    print('Градус комплексного числа', result.arg())
+    print('Градус комплексного числа', result.value())
 
-    p: int = 0
